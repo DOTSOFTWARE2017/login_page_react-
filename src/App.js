@@ -1,9 +1,10 @@
 import './App.css';
-import Login from './pages/login';
+import Allpagelink from './pages/Allpagelink';
+
 function App() {
   return (
     <>
-    <Login/>
+   <Allpagelink/>
     </>
   );
 }
