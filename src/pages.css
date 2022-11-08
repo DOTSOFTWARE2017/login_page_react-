@@ -1,5 +1,28 @@
-.align
+.log{
+   width:max-content;
+   margin-left: 39%;
+   padding: 45px;
+   margin-top: 9%;
+   border-radius: 4%;
+}
+
+.in
 {
-   margin-left: 35%;
-   margin-top: 5%;
+   border: none !important;
+   padding: 9px;
+   border-radius: 10px;
+ 
+
+}
+.btn
+{
+   width:45%;
+   margin-left: 27%;
+}
+body {
+   background-image: url(./img/pexels-pixabay-235986.jpg);
+   background-size:29%;
+   
+ 
+  
 }

@@ -1,23 +1,29 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getUser, removeUserSession } from './Utils/Common';
-import { TimeoutLogic } from './Utils/TimeoutLogic';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import {  removeUserSession } from "./Utils/Common";
+import { TimeoutLogic } from "./Utils/TimeoutLogic";
 
 function Dashboard(props) {
-  const user = getUser();
 
-const navigate=useNavigate();
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     removeUserSession();
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
-    <div>
-      Welcome {user.name}!<br /><br />
-      <input type="button" onClick={handleLogout} value="Logout" />
-      <TimeoutLogic/>
+    <div className="container log bg-dark text-white">
+      Welcome to Dashboard !<br />
+      <br />
+      <input
+        type="button"
+        className=" btn btn-primary"
+        onClick={handleLogout}
+        value="Logout"
+      />
+      <TimeoutLogic />
     </div>
   );
 }
