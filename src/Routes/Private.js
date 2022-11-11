@@ -32,7 +32,7 @@
 
 import { Navigate, Outlet } from "react-router-dom";
 
-function PrivateRoute({ isAuth,value }) {
+function PrivateRoute({ isAuth }) {
   
  return isAuth ? <Outlet /> : <Navigate to="/" />;
 }

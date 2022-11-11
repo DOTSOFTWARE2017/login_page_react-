@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { addEventListeners, removeEventListeners } from "./eventListenerUtil";
 
 export const TimeoutLogic = () => {
@@ -6,8 +7,8 @@ export const TimeoutLogic = () => {
     const createTimeout2 = () =>
       setTimeout(() => {
         // Implement a sign out function here
-        window.location.href = "/";
-      }, 10000);
+        Navigate('/')
+      }, 300000);
 
     const listener = () => {
       clearTimeout(timeout);

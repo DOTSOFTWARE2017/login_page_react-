@@ -1,25 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import PrivateRoute from "./Routes/Private";
-import Dashboard from './Dashboard'
-import {  useEffect, useState } from "react";
-import { getToken as token } from "./Utils/Common";
+import Dashboard from "./Dashboard";
+
+import {useState } from "react";
+import { getToken } from "./Utils/Common";
 function App() {
 
-  
-  const [Logged,setLogged]=useState(false)
+  const token = getToken();
 
-  useEffect(()=>{
-  
-    if(token)
-    {
-      setLogged(true)
-    }
+  const [Logged] = useState(token ? true : false);
 
-  },[])
-  
-    
- 
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,11 +18,9 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route element={(<PrivateRoute isAuth={Logged}  />)}>
-                
-                <Route path="/dashboard" element={(<Dashboard/> )}/>
-
-                 </Route>
+              <Route element={<PrivateRoute isAuth={Logged} />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
             </Routes>
           </div>
         </div>
