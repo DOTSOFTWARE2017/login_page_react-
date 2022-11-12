@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken, removeUserSession} from "./Utils/Common";
@@ -16,29 +17,38 @@ function Dashboard() {
   const token = getToken();
   const refresh = getTokenRefresh();
 
+
+  const decoder=jwtDecode(token)
+  console.log(decoder)
+
   console.log(refresh);
   console.log(token);
 
   useEffect(() => {
     setTimeout(() => {
-      axios
-        .post("https://2376-103-141-51-42.in.ngrok.io/api/v1/login", {
-          // headers: {
-          //     'Authorization': `Bearer ${refresh}`,
-          // },
-
+      axios.post("https://2689-103-141-51-42.in.ngrok.io/api/v1/login", {
           refreshtoken: refresh,
         })
         .then((response) => {
           sessionStorage.setItem("token", response.data.accesstoken);
           sessionStorage.setItem("refreshtoken", response.data.refreshtoken);
           console.log("refrence",response.data.refreshtoken)
+
+          
+          
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 59000);
+        .catch((err) => {
+
+          console.log("eror", err)
+  
+          navigate('/');
+  
+        })
+    },45000);
+    // eslint-disable-next-line
   }, []);
+
+ 
 
   const headers = {
     "Content-Type": "application/json",
@@ -48,7 +58,7 @@ function Dashboard() {
   useEffect(() => {
     axios
       .post(
-        "https://2376-103-141-51-42.in.ngrok.io/api/v1/studentProfile",
+        "https://2689-103-141-51-42.in.ngrok.io/api/v1/studentProfile",
         userdata,
         {
           headers: headers,
@@ -71,6 +81,13 @@ function Dashboard() {
 
   return (
     <div className="container log bg-dark text-white">
+
+<input
+        type="button"
+        className=" btn btn-primary"
+        onClick={handleLogout}
+        value="Logout"
+      />
       <table className="table table-dark table-hover">
         <thead>
           <tr>
@@ -243,12 +260,7 @@ function Dashboard() {
         </tbody>
       </table>
       <br />
-      <input
-        type="button"
-        className=" btn btn-primary"
-        onClick={handleLogout}
-        value="Logout"
-      />
+      
       <TimeoutLogic />
     </div>
   );
